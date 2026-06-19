@@ -1,0 +1,29 @@
+name: Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check clang-format
+        run: find include src tests examples benchmarks consumer -type f \( -name '*.hpp' -o -name '*.cpp' \) -print0 | xargs -0 clang-format --dry-run --Werror
+
+  clang-tidy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure with clang-tidy
+        run: >-
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+          -DHBT_BUILD_TESTS=OFF
+          -DCMAKE_CXX_CLANG_TIDY="clang-tidy;--warnings-as-errors=*"
+      - name: Analyze
+        run: cmake --build build --parallel 2

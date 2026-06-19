@@ -1,0 +1,29 @@
+hftbacktest-cpp
+Copyright (c) 2026 shenron0101
+
+This repository is an independent C++20 port of the original HftBacktest
+project. It is not affiliated with or endorsed by the upstream project.
+
+Original implementation
+-----------------------
+Project: HftBacktest
+Repository: https://github.com/nkaz001/hftbacktest
+Primary author: nkaz001 (https://github.com/nkaz001)
+Contributors: https://github.com/nkaz001/hftbacktest/graphs/contributors
+Pinned reference commit: 5f3ec40b2afb764e0fea112f941ed85523ef4e88
+License: MIT
+Copyright (c) 2022 nkaz001@protonmail.com
+
+Adapted components
+------------------
+- Event flags, layouts, orders, and state accounting
+- L2 hash-map and ROI-vector market-depth models
+- Asset, fee, latency, and queue models
+- Local and exchange processors and latency-aware order buses
+- Event scheduler, multi-asset backtest loop, readers, and recorder
+- NPY/NPZ event ingestion concepts and core behavioral tests
+
+The C++ implementation, CMake packaging, deterministic example, benchmark,
+automation, and presentation assets were produced for this independent port.
+The underlying architecture and algorithms originated in HftBacktest. The MIT
+license in LICENSE applies to the port and retains the upstream notice.

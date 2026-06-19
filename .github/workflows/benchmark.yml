@@ -1,0 +1,31 @@
+name: Benchmark
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'include/**'
+      - 'benchmarks/**'
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: >-
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          -DHBT_BUILD_TESTS=OFF -DHBT_BUILD_EXAMPLES=OFF
+          -DHBT_BUILD_BENCHMARKS=ON -DHBT_NATIVE_ARCH=OFF
+      - name: Build
+        run: cmake --build build --parallel 2
+      - name: Run fixed workload
+        run: ./build/hbt_replay_benchmark | tee benchmark.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: replay-benchmark-${{ github.sha }}
+          path: benchmark.txt

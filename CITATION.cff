@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: >-
+  If you use this C++ port, cite this software and the Original implementation,
+  HftBacktest by nkaz001, as appropriate for your work.
+title: hftbacktest-cpp
+type: software
+version: 0.1.0
+date-released: 2026-06-19
+license: MIT
+repository-code: https://github.com/shenron0101/hftbacktest-cpp
+url: https://github.com/shenron0101/hftbacktest-cpp
+authors:
+  - alias: shenron0101
+references:
+  - type: software
+    title: HftBacktest (Original implementation)
+    authors:
+      - alias: nkaz001
+    repository-code: https://github.com/nkaz001/hftbacktest
+    url: https://hftbacktest.readthedocs.io/en/latest/

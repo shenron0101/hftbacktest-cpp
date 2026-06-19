@@ -1,0 +1,11 @@
+/build*/
+/stage/
+/consumer-build/
+/.cache/
+compile_commands.json
+*.profraw
+*.profdata
+*.gcda
+*.gcno
+*.dSYM/
+.DS_Store

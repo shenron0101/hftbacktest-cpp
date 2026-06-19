@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  source-archives:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create release archives
+        run: |
+          cmake -S . -B build -DHBT_BUILD_TESTS=OFF -DHBT_BUILD_EXAMPLES=OFF
+          cmake --build build --target package_source
+          cp build/hftbacktest-cpp-*.tar.gz .
+          cp build/hftbacktest-cpp-*.zip .
+          sha256sum hftbacktest-cpp-*.tar.gz hftbacktest-cpp-*.zip > SHA256SUMS
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            hftbacktest-cpp-*.tar.gz
+            hftbacktest-cpp-*.zip
+            SHA256SUMS
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body: |
+            ## Original implementation credit
+
+            `hftbacktest-cpp` is an independent C++20 port of [HftBacktest](https://github.com/nkaz001/hftbacktest), the **Original implementation** created by [nkaz001](https://github.com/nkaz001) and developed with its [contributors](https://github.com/nkaz001/hftbacktest/graphs/contributors). Architecture and algorithms originate upstream. This port is not affiliated with or endorsed by HftBacktest.
+
+            Pinned upstream reference: `5f3ec40b2afb764e0fea112f941ed85523ef4e88`.
+          files: |
+            hftbacktest-cpp-*.tar.gz
+            hftbacktest-cpp-*.zip
+            SHA256SUMS

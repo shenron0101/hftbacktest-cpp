@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.20)
+project(hbt_consumer LANGUAGES CXX)
+find_package(hbt CONFIG REQUIRED)
+add_executable(hbt_consumer main.cpp)
+target_link_libraries(hbt_consumer PRIVATE hbt::hbt hbt::io)
