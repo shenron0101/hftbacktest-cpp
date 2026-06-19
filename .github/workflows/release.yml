@@ -23,7 +23,7 @@ jobs:
           cp build/hftbacktest-cpp-*.tar.gz .
           cp build/hftbacktest-cpp-*.zip .
           sha256sum hftbacktest-cpp-*.tar.gz hftbacktest-cpp-*.zip > SHA256SUMS
-      - uses: actions/attest-build-provenance@v2
+      - uses: actions/attest-build-provenance@v4
         with:
           subject-path: |
             hftbacktest-cpp-*.tar.gz
