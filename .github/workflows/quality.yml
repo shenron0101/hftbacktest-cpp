@@ -12,14 +12,14 @@ jobs:
   format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Check clang-format
         run: find include src tests examples benchmarks consumer -type f \( -name '*.hpp' -o -name '*.cpp' \) -print0 | xargs -0 clang-format --dry-run --Werror
 
   clang-tidy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Configure with clang-tidy
         run: >-
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug

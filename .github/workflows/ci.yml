@@ -26,7 +26,7 @@ jobs:
       CC: ${{ matrix.cc }}
       CXX: ${{ matrix.cxx }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Configure
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DHBT_WARNINGS_AS_ERRORS=ON
       - name: Build
@@ -38,7 +38,7 @@ jobs:
     name: macOS / AppleClang
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Configure
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DHBT_WARNINGS_AS_ERRORS=ON
       - name: Build
@@ -50,7 +50,7 @@ jobs:
     name: Installed package consumer
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Build and install
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DHBT_BUILD_TESTS=OFF -DHBT_BUILD_EXAMPLES=OFF
